@@ -13,6 +13,7 @@ const Todo = mongoose.model('Todo', {
 const typeDefs = `
   type Query {
     hello(name: String): String!
+    todos: [Todo]
   }
   type Todo {
     id: ID!
@@ -27,6 +28,7 @@ const typeDefs = `
 const resolvers = {
   Query: {
     hello: (_, { name }) => `Hello ${name || 'World'}`,
+    todos: () => Todo.find()
   },
   Mutation: {
     createTodo: async (_, { text }) =>{
