@@ -1,0 +1,24 @@
+{
+  "name": "tallerFinalBictiaFSJS",
+  "version": "1.0.0",
+  "description": "tallerFinalBictiaFSJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edgamen/tallerFinalBictiaFSJS.git"
+  },
+  "keywords": [],
+  "author": "Edgardo Mendez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edgamen/tallerFinalBictiaFSJS/issues"
+  },
+  "homepage": "https://github.com/edgamen/tallerFinalBictiaFSJS#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.16.9",
+    "mongoose": "^5.4.0"
+  }
+}
