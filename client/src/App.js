@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-//import './App.css';
 import gql from "graphql-tag";
 import { graphql, compose } from 'react-apollo';
 import Paper from '@material-ui/core/Paper';
@@ -23,11 +21,15 @@ const TodosQuery = gql`
 `;
 
 const UpdateMutation = gql`
-mutation($id: ID!, $complete: Boolean) {
+ mutation($id: ID!, $complete: Boolean) {
   updateTodo(id: $id, complete: $complete)
   
 }
 `;
+const RemoveMutation = gql`
+mutation($id: ID){
+  removeTodo(id: $id)
+}`;
 
 class App extends Component {
   //state = {
@@ -40,12 +42,37 @@ class App extends Component {
       variables: {
         id: todo.id,
         complete: !todo.complete
-
+      },
+      update: store => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: TodosQuery });
+        // Add our comment from the mutation to the end.
+        data.todos = data.todos.map(
+          x => x.id === todo.id ? {
+          ...todo,
+          complete: !todo.complete,
+        } : x);
+        // Write our data back to the cache.
+        store.writeQuery({ query: TodosQuery, data });
       }
     })
   };
-  removeTodo = todo => {
+  removeTodo = async todo => {
     //borrar todo
+    await this.props.removeTodo({
+      variables: {
+        id: todo.id,
+        
+      },
+      update: store => {
+        // Read the data from our cache for this query.
+        const data = store.readQuery({ query: TodosQuery });
+        // Add our comment from the mutation to the end.
+        data.todos = data.todos.filter(x => x.id !== todo.id);
+        // Write our data back to the cache.
+        store.writeQuery({ query: TodosQuery, data });
+      }
+    })
   };
 
 
@@ -84,6 +111,7 @@ class App extends Component {
 }
 
 export default compose(
+  graphql(RemoveMutation,{name: 'removeTodo'})
   graphql(UpdateMutation, { name: "updateTodo"}), 
   graphql(TodosQuery)(App));
 
