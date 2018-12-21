@@ -38,6 +38,8 @@ npm install @material-ui/icons
 Se importa un componente Paper desde App.js
 import Paper from '@material-ui/core/Paper';
 
+Se adapta componente de Lists de Material-UI
+
 
 
 
