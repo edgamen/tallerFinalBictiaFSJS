@@ -19,6 +19,6 @@
   "homepage": "https://github.com/edgamen/tallerFinalBictiaFSJS#readme",
   "dependencies": {
     "graphql-yoga": "^1.16.9",
-    "mongoose": "^5.4.0"
+    "mongoose": "^5.13.15"
   }
 }
